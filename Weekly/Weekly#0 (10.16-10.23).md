@@ -1,4 +1,6 @@
-# Weekly#01 (10.16-10.23)
+# Weekly#0 (10.15-10.22)
+
+### Daily#1(10.16)
 
 先嫩了个markdown编辑器
 
@@ -43,3 +45,29 @@ https://blog.csdn.net/bashana102/article/details/54956719
 ![image-20231016184949791](C:\Users\Deli\AppData\Roaming\Typora\typora-user-images\image-20231016184949791.png)
 
 ![image-20231016184933294](C:\Users\Deli\AppData\Roaming\Typora\typora-user-images\image-20231016184933294.png)
+
+
+
+### Daily#3(10.18)
+
+上午：上大β课
+
+下午：上大β课
+
+晚上：先去双创帮忙面试，然后修bug↓
+
+​	修复：图片太大导致三角形显示不正确的bug（原因是判断两个int异号时溢出了）
+
+​	修复：图片长宽不一致时显示不正确的bug（原因是遍历长宽时脑袋蒙了）
+
+​	试着做了SSAA的第一步放大和第二步旋转，旋转效果并不理想，中间有许多空洞。原因大概是算三角函数的浮点，以及图像内旋转后的锯齿没有完全贴合。
+
+放大前：
+
+![Screenshot 2023-10-18 225926](E:\Projects\Unique\Weekly\0\Screenshot 2023-10-18 225926.png)
+
+放大后：
+
+![Screenshot 2023-10-18 225932](E:\Projects\Unique\Weekly\0\Screenshot 2023-10-18 225932.png)
+
+放大并且旋转30°：![Screenshot 2023-10-18 225903](E:\Projects\Unique\Weekly\0\Screenshot 2023-10-18 225903.png)

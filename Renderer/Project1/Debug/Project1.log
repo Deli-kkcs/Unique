@@ -1,26 +1,4 @@
 ﻿  2.cpp
-E:\Projects\Unique\Renderer\Project1\2.cpp(49,58): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
-E:\Projects\Unique\Renderer\Project1\2.cpp(49,47): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
-E:\Projects\Unique\Renderer\Project1\2.cpp(49,36): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
-E:\Projects\Unique\Renderer\Project1\2.cpp(49,27): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
-E:\Projects\Unique\Renderer\Project1\2.cpp(50,62): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
-E:\Projects\Unique\Renderer\Project1\2.cpp(50,51): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
-E:\Projects\Unique\Renderer\Project1\2.cpp(50,40): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
-E:\Projects\Unique\Renderer\Project1\2.cpp(50,29): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
-E:\Projects\Unique\Renderer\Project1\2.cpp(53,58): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
-E:\Projects\Unique\Renderer\Project1\2.cpp(53,47): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
-E:\Projects\Unique\Renderer\Project1\2.cpp(53,36): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
-E:\Projects\Unique\Renderer\Project1\2.cpp(53,27): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
-E:\Projects\Unique\Renderer\Project1\2.cpp(54,62): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
-E:\Projects\Unique\Renderer\Project1\2.cpp(54,51): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
-E:\Projects\Unique\Renderer\Project1\2.cpp(54,40): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
-E:\Projects\Unique\Renderer\Project1\2.cpp(54,29): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
-E:\Projects\Unique\Renderer\Project1\2.cpp(57,58): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
-E:\Projects\Unique\Renderer\Project1\2.cpp(57,47): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
-E:\Projects\Unique\Renderer\Project1\2.cpp(57,36): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
-E:\Projects\Unique\Renderer\Project1\2.cpp(57,27): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
-E:\Projects\Unique\Renderer\Project1\2.cpp(58,62): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
-E:\Projects\Unique\Renderer\Project1\2.cpp(58,51): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
-E:\Projects\Unique\Renderer\Project1\2.cpp(58,40): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
-E:\Projects\Unique\Renderer\Project1\2.cpp(58,29): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
+E:\Projects\Unique\Renderer\Project1\2.cpp(173,16): warning C4244: “初始化”: 从“double”转换到“int”，可能丢失数据
+E:\Projects\Unique\Renderer\Project1\2.cpp(174,18): warning C4244: “初始化”: 从“double”转换到“int”，可能丢失数据
   Project1.vcxproj -> E:\Projects\Unique\Renderer\Project1\Debug\Project1.exe
