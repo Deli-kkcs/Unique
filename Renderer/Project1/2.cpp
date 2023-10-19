@@ -12,12 +12,65 @@ int ssaa_times = 2; // SSAA倍数
 class Triangle
 {
 public:
-	float x1, y1;
-	float x2, y2;
-	float x3, y3;
+	float x1, y1,z1;
+	float x2, y2,z2;
+	float x3, y3,z3;
+	Triangle() {};
 	Triangle(float x1, float y1, float x2, float y2, float x3, float y3)
-		: x1(x1), y1(y1), x2(x2), y2(y2), x3(x3), y3(y3) {}
+		: x1(x1), y1(y1), x2(x2), y2(y2), x3(x3), y3(y3) {};
+	Triangle(float x1, float y1,float z1, float x2, float y2,float z2, float x3, float y3,float z3)
+		: x1(x1), y1(y1),z1(z1), x2(x2), y2(y2),z2(z2), x3(x3), y3(y3),z3(z3) {};
 };
+//[-1,1]的倍数转换成绝对像素坐标
+void RelativeToAbsolute(Triangle* tri)
+{
+	tri->x1 = tri->x1*height;
+	tri->y1 = tri->y1*width;
+	tri->x2 = tri->x2*height;
+	tri->y2 = tri->y2*width;
+	tri->x3 = tri->x3*height;
+	tri->y3 = tri->y3*width;
+}
+//将三角形的相机坐标转换为透视坐标,观察者在相机后方viewDepth个单位,x,y结果在[-1,1]范围外不显示在相机中
+void ImageToPerspective(Triangle* tri)
+{
+	float viewDepth = 1.f;
+	tri->x1 /= (tri->z1 / viewDepth + 1);
+	tri->y1 /= (tri->z1 / viewDepth + 1);
+	tri->z1 /= (tri->z1 / viewDepth + 1);
+	tri->x2 /= (tri->z2 / viewDepth + 1);
+	tri->y2 /= (tri->z2 / viewDepth + 1);
+	tri->z2 /= (tri->z2 / viewDepth + 1);
+	tri->x3 /= (tri->z3 / viewDepth + 1);
+	tri->y3 /= (tri->z3 / viewDepth + 1);
+	tri->z3 /= (tri->z3 / viewDepth + 1);
+}
+//将三角形的透视坐标转换为屏幕坐标
+void PerspectiveToScreen(Triangle* tri)
+{
+	tri->x1 = (tri->x1 + 1) / 2 * height;
+	tri->y1 = (tri->y1 + 1) / 2 * width;
+	tri->x2 = (tri->x2 + 1) / 2 * height;
+	tri->y2 = (tri->y2 + 1) / 2 * width;
+	tri->x3 = (tri->x3 + 1) / 2 * height;
+	tri->y3 = (tri->y3 + 1) / 2 * width;
+}
+class Cube
+{
+public:
+	float x, y, z;		//中心点
+	float length;		//边长
+	float rx, ry, rz;	//旋转角度
+	Triangle face[12];	//六个面的12个三角形
+
+	Cube(float x, float y, float z, float length, float rx, float ry, float rz)
+		:x(x), y(y), z(z), length(length), rx(rx), ry(ry), rz(rz)
+	{	
+
+	};
+};
+//TODO 将cude的六个面分别用三角形表示
+
 
 class _ppm
 {
@@ -44,10 +97,6 @@ public:
 	void MySetPixel(int index_pixel, int index_pixel_x, int index_pixel_y, int newLine, int newColumn);
 };
 
-//struct Vector2
-//{
-//
-//};
 bool CheckDiffirentSign(float x, float y)
 {
 	if (x >= 0 && y <= 0)
@@ -62,12 +111,12 @@ float CrossMultiply(float x1, float y1, float x2, float y2)
 }
 bool IsInTriangle(int height,int width, int x, int y, Triangle tri)
 {
-	float A_X = tri.x1 * height;
-	float A_Y = tri.y1 * width;
-	float B_X = tri.x2 * height;
-	float B_Y = tri.y2 * width;
-	float C_X = tri.x3 * height;
-	float C_Y = tri.y3 * width;
+	float A_X = tri.x1;
+	float A_Y = tri.y1;
+	float B_X = tri.x2;
+	float B_Y = tri.y2;
+	float C_X = tri.x3;
+	float C_Y = tri.y3;
 	float t1 = CrossMultiply(x - A_X, y - A_Y, B_X - A_X, B_Y - A_Y);		// AX x AB
 	float t2 = CrossMultiply(C_X - A_X, C_Y - A_Y, B_X - A_X, B_Y - A_Y);	// AC x AB
 	if(CheckDiffirentSign(t1,t2))
@@ -162,15 +211,18 @@ void _ppm::SSAA()
 	Rotate(45.0f);
 	WriteImageRotated();
 }
-//pixels_plus顺时针旋转??度到pixels??
+//pixels_plus逆时针旋转degree度到pixels_rotated
 void _ppm::Rotate(float degree)
 {
 	pixels_rotated = (unsigned char*)calloc(sizeX * sizeY * 3 * ssaa_times * ssaa_times, sizeof(unsigned char));
 	for (int line = 0; line < sizeX * ssaa_times; line++)
 		for (int column = 0; column < sizeY * ssaa_times; column++)
 		{
-			int newLine = (line - sizeX * ssaa_times / 2.0f) * cos(degree * 3.1415926f / 180.0f) - (column - sizeY * ssaa_times / 2.0f) * sin(degree * 3.1415926f / 180.0f) + sizeX * ssaa_times / 2.0f;
-			int newColumn = (line - sizeX * ssaa_times / 2.0f) * sin(degree * 3.1415926f / 180.0f) + (column - sizeY * ssaa_times / 2.0f) * cos(degree * 3.1415926f / 180.0f) + sizeY * ssaa_times / 2.0f;
+			float radian = degree * 3.1415926f / 180.0f;
+			float center_x = sizeX * ssaa_times / 2.0f;
+			float center_y = sizeY * ssaa_times / 2.0f;
+			int newLine = (line - center_x) * cos(radian) - (column - center_y / 2.0f) * sin(radian) + center_x;
+			int newColumn = (line - center_x) * sin(radian) + (column - center_y / 2.0f) * cos(radian) + center_y;
 			if (newLine >= 0 && newLine < sizeX * ssaa_times && newColumn >= 0 && newColumn < sizeY * ssaa_times)
 			{
 				int index_pixel = line * sizeY * ssaa_times * 3 + column * 3;
@@ -199,9 +251,16 @@ void _ppm::MySetPixel(int index_pixel, int index_pixel_x, int index_pixel_y, int
 int main()
 {
 	_ppm img;
-	Triangle tri(0.1f, 0.2f,0.6f, 0.8f, 0.8f, 0.4f);
-	img.creat_triangle(width, height, tri);
+
+	Triangle tri2(-0.7f, 0.5f,100.f, 0.6f, 0.8f, 100.f, -0.2f, -0.4f, 100.f);
+	RelativeToAbsolute(&tri2);
+	ImageToPerspective(&tri2);
+	PerspectiveToScreen(&tri2);
+
+	img.creat_triangle(width, height, tri2);
 	img.write_image(file_pos);
-	img.SSAA();
+	printf("tri2.x1 = %f,tri2.y1 = %f\n", tri2.x1, tri2.y1);
+	printf("tri2.x2 = %f,tri2.y2 = %f\n", tri2.x2, tri2.y2);
+	printf("tri2.x3 = %f,tri2.y3 = %f\n", tri2.x3, tri2.y3);
 	return 0;
 }
