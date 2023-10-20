@@ -1,14 +1,40 @@
 #define _CRT_SECURE_NO_WARNINGS
+
 #include <stdio.h>
 #include <stdlib.h>
+#include<string.h>
 #include <corecrt_math.h>
+#include <time.h>
 char file_pos[100] = "E:\\Projects\\Unique\\Renderer\\Project1\\TEST_1.ppm";
 char filePlus_pos[100] = "E:\\Projects\\Unique\\Renderer\\Project1\\TEST_1_Plus.ppm";
 char file90_pos[100] = "E:\\Projects\\Unique\\Renderer\\Project1\\TEST_1_90.ppm";
 int width = 100;
 int height = 100;
+float viewDepth; //观察者在相机后方viewDepth个单位
 int ssaa_times = 2; // SSAA倍数
+int index_face = 0;
+int red[12] = { 255,235,215,195,175,155,135,115,95,75,55,35 };
 
+class Vector3
+{
+public:
+	float x, y, z;
+	Vector3() {};
+	Vector3(float x, float y, float z)
+		: x(x), y(y), z(z) {};
+};
+void RotateVector3(Vector3* vec, float rx, float ry, float rz)
+{
+	float radian_x = rx * 3.1415926f / 180.0f;
+	float radian_y = ry * 3.1415926f / 180.0f;
+	float radian_z = rz * 3.1415926f / 180.0f;
+	float x = vec->x;
+	float y = vec->y;
+	float z = vec->z;
+	vec->x = x * cos(radian_y) * cos(radian_z) + y * (sin(radian_x) * sin(radian_y) * cos(radian_z) - cos(radian_x) * sin(radian_z)) + z * (cos(radian_x) * sin(radian_y) * cos(radian_z) + sin(radian_x) * sin(radian_z));
+	vec->y = x * cos(radian_y) * sin(radian_z) + y * (sin(radian_x) * sin(radian_y) * sin(radian_z) + cos(radian_x) * cos(radian_z)) + z * (cos(radian_x) * sin(radian_y) * sin(radian_z) - sin(radian_x) * cos(radian_z));
+	vec->z = -x * sin(radian_y) + y * sin(radian_x) * cos(radian_y) + z * cos(radian_x) * cos(radian_y);
+}
 class Triangle
 {
 public:
@@ -31,10 +57,9 @@ void RelativeToAbsolute(Triangle* tri)
 	tri->x3 = tri->x3*height;
 	tri->y3 = tri->y3*width;
 }
-//将三角形的相机坐标转换为透视坐标,观察者在相机后方viewDepth个单位,x,y结果在[-1,1]范围外不显示在相机中
+//将三角形的相机坐标转换为透视坐标,x,y结果在[-1,1]范围外不显示在相机中
 void ImageToPerspective(Triangle* tri)
 {
-	float viewDepth = 1.f;
 	tri->x1 /= (tri->z1 / viewDepth + 1);
 	tri->y1 /= (tri->z1 / viewDepth + 1);
 	tri->z1 /= (tri->z1 / viewDepth + 1);
@@ -61,15 +86,45 @@ public:
 	float x, y, z;		//中心点
 	float length;		//边长
 	float rx, ry, rz;	//旋转角度
+	Vector3 vertex[8];	//八个顶点
 	Triangle face[12];	//六个面的12个三角形
 
 	Cube(float x, float y, float z, float length, float rx, float ry, float rz)
 		:x(x), y(y), z(z), length(length), rx(rx), ry(ry), rz(rz)
 	{	
+		
+
+		vertex[0] = Vector3(x - length / 2, y - length / 2, z - length / 2);
+		vertex[1] = Vector3(x - length / 2, y - length / 2, z + length / 2);
+		vertex[2] = Vector3(x - length / 2, y + length / 2, z - length / 2);
+		vertex[3] = Vector3(x - length / 2, y + length / 2, z + length / 2);
+		vertex[4] = Vector3(x + length / 2, y - length / 2, z - length / 2);
+		vertex[5] = Vector3(x + length / 2, y - length / 2, z + length / 2);
+		vertex[6] = Vector3(x + length / 2, y + length / 2, z - length / 2);
+		vertex[7] = Vector3(x + length / 2, y + length / 2, z + length / 2);
+		//根据rx ry rz旋转顶点位置
+		for (int i = 0; i < 8; i++)
+			RotateVector3(&vertex[i], rx, ry, rz);
+		face[0] = Triangle(vertex[0].x, vertex[0].y, vertex[0].z, vertex[1].x, vertex[1].y, vertex[1].z, vertex[2].x, vertex[2].y, vertex[2].z);
+		face[1] = Triangle(vertex[1].x, vertex[1].y, vertex[1].z, vertex[2].x, vertex[2].y, vertex[2].z, vertex[3].x, vertex[3].y, vertex[3].z);
+		face[2] = Triangle(vertex[0].x, vertex[0].y, vertex[0].z, vertex[1].x, vertex[1].y, vertex[1].z, vertex[4].x, vertex[4].y, vertex[4].z);
+		face[3] = Triangle(vertex[1].x, vertex[1].y, vertex[1].z, vertex[4].x, vertex[4].y, vertex[4].z, vertex[5].x, vertex[5].y, vertex[5].z);
+
+		face[4] = Triangle(vertex[0].x, vertex[0].y, vertex[0].z, vertex[2].x, vertex[2].y, vertex[2].z, vertex[4].x, vertex[4].y, vertex[4].z);
+		face[5] = Triangle(vertex[2].x, vertex[2].y, vertex[2].z, vertex[4].x, vertex[4].y, vertex[4].z, vertex[6].x, vertex[6].y, vertex[6].z);
+		face[6] = Triangle(vertex[1].x, vertex[1].y, vertex[1].z, vertex[3].x, vertex[3].y, vertex[3].z, vertex[5].x, vertex[5].y, vertex[5].z);
+		face[7] = Triangle(vertex[3].x, vertex[3].y, vertex[3].z, vertex[5].x, vertex[5].y, vertex[5].z, vertex[7].x, vertex[7].y, vertex[7].z);
+
+		face[8] = Triangle(vertex[2].x, vertex[2].y, vertex[2].z, vertex[3].x, vertex[3].y, vertex[3].z, vertex[6].x, vertex[6].y, vertex[6].z);
+		face[9] = Triangle(vertex[3].x, vertex[3].y, vertex[3].z, vertex[6].x, vertex[6].y, vertex[6].z, vertex[7].x, vertex[7].y, vertex[7].z);
+		face[10] = Triangle(vertex[4].x, vertex[4].y, vertex[4].z, vertex[5].x, vertex[5].y, vertex[5].z, vertex[6].x, vertex[6].y, vertex[6].z);
+		face[11] = Triangle(vertex[5].x, vertex[5].y, vertex[5].z, vertex[6].x, vertex[6].y, vertex[6].z, vertex[7].x, vertex[7].y, vertex[7].z);
+
+		
 
 	};
 };
-//TODO 将cude的六个面分别用三角形表示
+
 
 
 class _ppm
@@ -81,6 +136,7 @@ private:
 	unsigned char* image;				//保存像素
 	unsigned char* pixels_plus;
 	unsigned char* pixels_rotated;
+	float* depth;
 public:
 	~_ppm()
 	{
@@ -88,6 +144,7 @@ public:
 			free(image);
 		image = NULL;
 	}
+	void Initialize();
 	void write_image(char* ch);
 	void WriteImagePlus();
 	void WriteImageRotated();
@@ -95,6 +152,7 @@ public:
 	void SSAA();
 	void Rotate(float degree);
 	void MySetPixel(int index_pixel, int index_pixel_x, int index_pixel_y, int newLine, int newColumn);
+	bool IsCovered(int x, int y, Triangle tri);
 };
 
 bool CheckDiffirentSign(float x, float y)
@@ -131,7 +189,47 @@ bool IsInTriangle(int height,int width, int x, int y, Triangle tri)
 		return false;
 	return true;
 }
-
+bool _ppm::IsCovered(int x, int y, Triangle tri)
+{
+	
+	//求三角形平面方程Ax + By + Cz + D = 0
+	float z = -1.f;
+	float A = (tri.y2 - tri.y1) * (tri.z3 - tri.z1) - (tri.z2 - tri.z1) * (tri.y3 - tri.y1);
+	float B = (tri.z2 - tri.z1) * (tri.x3 - tri.x1) - (tri.x2 - tri.x1) * (tri.z3 - tri.z1);
+	float C = (tri.x2 - tri.x1) * (tri.y3 - tri.y1) - (tri.y2 - tri.y1) * (tri.x3 - tri.x1);
+	float D = 0 - (A * tri.x1 + B * tri.y1 + C * tri.z1);
+	//根据x y确定三角形平面上的z
+	if (C != 0)
+	{
+		z = 0 - (A * x + B * y + D) / C;
+	}
+	else
+		return false;
+	if (index_face == 4)
+	{
+		//printf("z = %f\n", z);
+	}
+	//if (depth[x * sizeY + y] == 0 || depth[x * sizeY + y] >= z)
+	if (depth[x * sizeY + y] <= z)
+	{
+		depth[x * sizeY + y] = z;
+		return false;
+	}
+	return true;
+}
+void _ppm::Initialize()
+{	
+	//pX = 5;	//黑白图片
+	pX = 6;		//彩色图片
+	sizeX = height;//x，高度
+	sizeY = width;//y，宽度
+	maxColor = 255;//色彩范围
+	if (pX == 6)
+		image = (unsigned char*)calloc(sizeX * sizeY * 3, sizeof(unsigned char));
+	if (pX == 5)
+		image = (unsigned char*)calloc(sizeX * sizeY, sizeof(unsigned char));
+	depth = (float*)calloc(sizeX * sizeY, sizeof(float));
+}
 void _ppm::write_image(char* ch)
 {//图片输出路径
 	FILE* fp = fopen(ch, "wb");
@@ -165,23 +263,24 @@ void _ppm::WriteImageRotated()
 }
 void _ppm::creat_triangle(int width, int height, Triangle tri)
 {
-	//pX = 5;	//黑白图片
-	pX = 6;		//彩色图片
-	sizeX = height;//x，高度
-	sizeY = width;//y，宽度
-	maxColor = 255;//色彩范围
-	if(pX == 6)
-		image = (unsigned char*)calloc(sizeX * sizeY*3, sizeof(unsigned char));
-	if (pX == 5)
-		image = (unsigned char*)calloc(sizeX * sizeY, sizeof(unsigned char));
+	//生成随机r颜色,每次生成的颜色都不一样
+	//srand((unsigned)time(NULL));
+	int r = red[index_face];
+	if (r == 175)
+	{
+		// index_face = 4
+	}
+	printf("***r = %d ***\n", r);
+	//int r = 255;
 	for (int i = 0; i < sizeX; i++)
 	{
 		for (int j = 0; j < sizeY; j++)
 		{
 			if (IsInTriangle(this->sizeX,this->sizeY,i,j,tri))
-				*(image + (i * sizeY + j) * 3 + 0) = 255;
-			else
-				*(image + (i * sizeY + j) * 3 + 0) = 0;
+				if(!IsCovered(i, j, tri))
+					*(image + (i * sizeY + j) * 3 + 0) = /*255*/r;
+			/*else
+				*(image + (i * sizeY + j) * 3 + 0) = 0;*/
 			*(image+(i * sizeY + j) * 3 + 1) = 0;
 			*(image+(i * sizeY + j) * 3 + 2) = 0;
 		}
@@ -236,7 +335,6 @@ void _ppm::Rotate(float degree)
 			}
 		}
 }
-
 void _ppm::MySetPixel(int index_pixel, int index_pixel_x, int index_pixel_y, int newLine, int newColumn)
 {
 	int index_pixel_plus = index_pixel_y * ssaa_times * 3 + width * ssaa_times * ssaa_times * 3 * index_pixel_x + newLine * width * ssaa_times * 3 + newColumn * 3;
@@ -250,9 +348,12 @@ void _ppm::MySetPixel(int index_pixel, int index_pixel_x, int index_pixel_y, int
 
 int main()
 {
+	width = 400;
+	height = 400;
+	viewDepth = 1.f;
 	_ppm img;
 
-	Triangle tri2(-0.7f, 0.5f,100.f, 0.6f, 0.8f, 100.f, -0.2f, -0.4f, 100.f);
+	/*Triangle tri2(-0.7f, 0.5f,100.f, 0.6f, 0.8f, 100.f, -0.2f, -0.4f, 100.f);
 	RelativeToAbsolute(&tri2);
 	ImageToPerspective(&tri2);
 	PerspectiveToScreen(&tri2);
@@ -261,6 +362,28 @@ int main()
 	img.write_image(file_pos);
 	printf("tri2.x1 = %f,tri2.y1 = %f\n", tri2.x1, tri2.y1);
 	printf("tri2.x2 = %f,tri2.y2 = %f\n", tri2.x2, tri2.y2);
-	printf("tri2.x3 = %f,tri2.y3 = %f\n", tri2.x3, tri2.y3);
+	printf("tri2.x3 = %f,tri2.y3 = %f\n", tri2.x3, tri2.y3);*/
+
+	bool isTest = 0;
+	Cube cube(0, 0, 60, 20, 20, 20, 30);
+	img.Initialize();
+	for (int i = 0; i < 12; i++)
+	{
+		
+		if (isTest)
+			i = 5;
+		index_face = i;
+		ImageToPerspective(&cube.face[i]);
+		PerspectiveToScreen(&cube.face[i]);
+		printf("tri2.x1 = %f,tri2.y1 = %f\n", cube.face[i].x1, cube.face[i].y1);
+		printf("tri2.x2 = %f,tri2.y2 = %f\n", cube.face[i].x2, cube.face[i].y2);
+		printf("tri2.x3 = %f,tri2.y3 = %f\n", cube.face[i].x3, cube.face[i].y3);
+		printf("________________________________\n");
+		
+		img.creat_triangle(width, height, cube.face[i]);
+		img.write_image(file_pos);
+		if (isTest)
+			break;
+	}
 	return 0;
 }
