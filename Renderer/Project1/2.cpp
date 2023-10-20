@@ -23,7 +23,7 @@ public:
 	Vector3(float x, float y, float z)
 		: x(x), y(y), z(z) {};
 };
-void RotateVector3(Vector3* vec, float rx, float ry, float rz)
+void RotateVector3(Vector3 vertex_center,Vector3* vec, float rx, float ry, float rz)
 {
 	float radian_x = rx * 3.1415926f / 180.0f;
 	float radian_y = ry * 3.1415926f / 180.0f;
@@ -31,9 +31,9 @@ void RotateVector3(Vector3* vec, float rx, float ry, float rz)
 	float x = vec->x;
 	float y = vec->y;
 	float z = vec->z;
-	vec->x = x * cos(radian_y) * cos(radian_z) + y * (sin(radian_x) * sin(radian_y) * cos(radian_z) - cos(radian_x) * sin(radian_z)) + z * (cos(radian_x) * sin(radian_y) * cos(radian_z) + sin(radian_x) * sin(radian_z));
-	vec->y = x * cos(radian_y) * sin(radian_z) + y * (sin(radian_x) * sin(radian_y) * sin(radian_z) + cos(radian_x) * cos(radian_z)) + z * (cos(radian_x) * sin(radian_y) * sin(radian_z) - sin(radian_x) * cos(radian_z));
-	vec->z = -x * sin(radian_y) + y * sin(radian_x) * cos(radian_y) + z * cos(radian_x) * cos(radian_y);
+	vec->x = vertex_center.x+x * cos(radian_y) * cos(radian_z) + y * (sin(radian_x) * sin(radian_y) * cos(radian_z) - cos(radian_x) * sin(radian_z)) + z * (cos(radian_x) * sin(radian_y) * cos(radian_z) + sin(radian_x) * sin(radian_z));
+	vec->y = vertex_center.y+x * cos(radian_y) * sin(radian_z) + y * (sin(radian_x) * sin(radian_y) * sin(radian_z) + cos(radian_x) * cos(radian_z)) + z * (cos(radian_x) * sin(radian_y) * sin(radian_z) - sin(radian_x) * cos(radian_z));
+	vec->z = vertex_center.z-x * sin(radian_y) + y * sin(radian_x) * cos(radian_y) + z * cos(radian_x) * cos(radian_y);
 }
 class Triangle
 {
@@ -92,19 +92,18 @@ public:
 	Cube(float x, float y, float z, float length, float rx, float ry, float rz)
 		:x(x), y(y), z(z), length(length), rx(rx), ry(ry), rz(rz)
 	{	
-		
-
-		vertex[0] = Vector3(x - length / 2, y - length / 2, z - length / 2);
-		vertex[1] = Vector3(x - length / 2, y - length / 2, z + length / 2);
-		vertex[2] = Vector3(x - length / 2, y + length / 2, z - length / 2);
-		vertex[3] = Vector3(x - length / 2, y + length / 2, z + length / 2);
-		vertex[4] = Vector3(x + length / 2, y - length / 2, z - length / 2);
-		vertex[5] = Vector3(x + length / 2, y - length / 2, z + length / 2);
-		vertex[6] = Vector3(x + length / 2, y + length / 2, z - length / 2);
-		vertex[7] = Vector3(x + length / 2, y + length / 2, z + length / 2);
+		Vector3 vertex_center = Vector3(x, y, z);
+		vertex[0] = Vector3(- length / 2, - length / 2, - length / 2);
+		vertex[1] = Vector3(- length / 2, - length / 2, + length / 2);
+		vertex[2] = Vector3(- length / 2, + length / 2, - length / 2);
+		vertex[3] = Vector3(- length / 2, + length / 2, + length / 2);
+		vertex[4] = Vector3(+ length / 2, - length / 2, - length / 2);
+		vertex[5] = Vector3(+ length / 2, - length / 2, + length / 2);
+		vertex[6] = Vector3(+ length / 2, + length / 2, - length / 2);
+		vertex[7] = Vector3(+ length / 2, + length / 2, + length / 2);
 		//根据rx ry rz旋转顶点位置
 		for (int i = 0; i < 8; i++)
-			RotateVector3(&vertex[i], rx, ry, rz);
+			RotateVector3(vertex_center ,&vertex[i], rx, ry, rz);
 		face[0] = Triangle(vertex[0].x, vertex[0].y, vertex[0].z, vertex[1].x, vertex[1].y, vertex[1].z, vertex[2].x, vertex[2].y, vertex[2].z);
 		face[1] = Triangle(vertex[1].x, vertex[1].y, vertex[1].z, vertex[2].x, vertex[2].y, vertex[2].z, vertex[3].x, vertex[3].y, vertex[3].z);
 		face[2] = Triangle(vertex[0].x, vertex[0].y, vertex[0].z, vertex[1].x, vertex[1].y, vertex[1].z, vertex[4].x, vertex[4].y, vertex[4].z);
@@ -138,12 +137,6 @@ private:
 	unsigned char* pixels_rotated;
 	float* depth;
 public:
-	~_ppm()
-	{
-		if (image != NULL)
-			free(image);
-		image = NULL;
-	}
 	void Initialize();
 	void write_image(char* ch);
 	void WriteImagePlus();
@@ -209,8 +202,9 @@ bool _ppm::IsCovered(int x, int y, Triangle tri)
 	{
 		//printf("z = %f\n", z);
 	}
-	//if (depth[x * sizeY + y] == 0 || depth[x * sizeY + y] >= z)
-	if (depth[x * sizeY + y] <= z)
+
+	if (depth[x * sizeY + y] == 0 || depth[x * sizeY + y] >= z)
+	//if (depth[x * sizeY + y] <= z)
 	{
 		depth[x * sizeY + y] = z;
 		return false;
@@ -346,12 +340,30 @@ void _ppm::MySetPixel(int index_pixel, int index_pixel_x, int index_pixel_y, int
 	}
 }
 
+
+void DrawCube(Cube cube,_ppm image)
+{
+	for (int i = 0; i < 12; i++)
+	{
+		index_face = i;
+		ImageToPerspective(&cube.face[i]);
+		PerspectiveToScreen(&cube.face[i]);
+		/*printf("tri2.x1 = %f,tri2.y1 = %f\n", cube.face[i].x1, cube.face[i].y1);
+		printf("tri2.x2 = %f,tri2.y2 = %f\n", cube.face[i].x2, cube.face[i].y2);
+		printf("tri2.x3 = %f,tri2.y3 = %f\n", cube.face[i].x3, cube.face[i].y3);
+		printf("________________________________\n");*/
+
+		image.creat_triangle(width, height, cube.face[i]);
+		
+	}
+}
 int main()
 {
-	width = 400;
-	height = 400;
+	width = 800;
+	height = 800;
 	viewDepth = 1.f;
 	_ppm img;
+	img.Initialize();
 
 	/*Triangle tri2(-0.7f, 0.5f,100.f, 0.6f, 0.8f, 100.f, -0.2f, -0.4f, 100.f);
 	RelativeToAbsolute(&tri2);
@@ -364,26 +376,18 @@ int main()
 	printf("tri2.x2 = %f,tri2.y2 = %f\n", tri2.x2, tri2.y2);
 	printf("tri2.x3 = %f,tri2.y3 = %f\n", tri2.x3, tri2.y3);*/
 
-	bool isTest = 0;
-	Cube cube(0, 0, 60, 20, 20, 20, 30);
-	img.Initialize();
-	for (int i = 0; i < 12; i++)
-	{
-		
-		if (isTest)
-			i = 5;
-		index_face = i;
-		ImageToPerspective(&cube.face[i]);
-		PerspectiveToScreen(&cube.face[i]);
-		printf("tri2.x1 = %f,tri2.y1 = %f\n", cube.face[i].x1, cube.face[i].y1);
-		printf("tri2.x2 = %f,tri2.y2 = %f\n", cube.face[i].x2, cube.face[i].y2);
-		printf("tri2.x3 = %f,tri2.y3 = %f\n", cube.face[i].x3, cube.face[i].y3);
-		printf("________________________________\n");
-		
-		img.creat_triangle(width, height, cube.face[i]);
-		img.write_image(file_pos);
-		if (isTest)
-			break;
-	}
+	Cube cube(0, 0, 60, 20, 45, 45, 0);
+	Cube cube2(10, 10, 60, 20, 10, 20, 10);
+	DrawCube(cube,img);
+	DrawCube(cube2, img);
+	img.write_image(file_pos);
+	//for (int i = 0; i < 12; i++)
+	//{
+	//	index_face = i;
+	//	ImageToPerspective(&cube2.face[i]);
+	//	PerspectiveToScreen(&cube2.face[i]);
+	//	img.creat_triangle(width, height, cube2.face[i]);
+	//	img.write_image(file_pos);
+	//}
 	return 0;
 }

@@ -1,7 +1,7 @@
 ﻿  2.cpp
-E:\Projects\Unique\Renderer\Project1\2.cpp(34,131): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
-E:\Projects\Unique\Renderer\Project1\2.cpp(35,131): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
-E:\Projects\Unique\Renderer\Project1\2.cpp(36,66): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
-E:\Projects\Unique\Renderer\Project1\2.cpp(323,16): warning C4244: “初始化”: 从“double”转换到“int”，可能丢失数据
-E:\Projects\Unique\Renderer\Project1\2.cpp(324,18): warning C4244: “初始化”: 从“double”转换到“int”，可能丢失数据
+E:\Projects\Unique\Renderer\Project1\2.cpp(34,147): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+E:\Projects\Unique\Renderer\Project1\2.cpp(35,147): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+E:\Projects\Unique\Renderer\Project1\2.cpp(36,81): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+E:\Projects\Unique\Renderer\Project1\2.cpp(317,16): warning C4244: “初始化”: 从“double”转换到“int”，可能丢失数据
+E:\Projects\Unique\Renderer\Project1\2.cpp(318,18): warning C4244: “初始化”: 从“double”转换到“int”，可能丢失数据
   Project1.vcxproj -> E:\Projects\Unique\Renderer\Project1\Debug\Project1.exe
