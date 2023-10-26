@@ -32,13 +32,13 @@
 //        pixels[i * 4 + 3] = pixels[i * 4 + 3]; // 透明度通道保持不变
 //    }
 //
-//    //FIBITMAP* image = FreeImage_ConvertFromRawBits(pixels_plus, width, height, width * 4, 32, FI_RGBA_RED_MASK, FI_RGBA_GREEN_MASK, FI_RGBA_BLUE_MASK, false);
-//    FIBITMAP* image = FreeImage_ConvertFromRawBits(pixels, width, height, width * 4, 32, 0x00FF0000, 0XFF000000, 0X0000FF00, false);
+//    //FIBITMAP* pixels = FreeImage_ConvertFromRawBits(pixels_plus, width, height, width * 4, 32, FI_RGBA_RED_MASK, FI_RGBA_GREEN_MASK, FI_RGBA_BLUE_MASK, false);
+//    FIBITMAP* pixels = FreeImage_ConvertFromRawBits(pixels, width, height, width * 4, 32, 0x00FF0000, 0XFF000000, 0X0000FF00, false);
 //    // 保存图像为PSD文件
 //    const char* outputFilename = "outputTEST_1.psd";  // 输出图像文件路径
-//    FreeImage_Save(FIF_PSD, image, outputFilename);
+//    FreeImage_Save(FIF_PSD, pixels, outputFilename);
 //    // 释放FIBITMAP对象和像素数据内存
-//    FreeImage_Unload(image);
+//    FreeImage_Unload(pixels);
 //}
 //void MySavePlusPSD()
 //{
@@ -50,13 +50,13 @@
 //        pixels_plus[i * 4 + 2] = temp;              // 红色通道 -> 蓝色通道
 //        pixels_plus[i * 4 + 3] = pixels_plus[i * 4 + 3]; // 透明度通道保持不变
 //    }
-//    FIBITMAP* image = FreeImage_ConvertFromRawBits(pixels_plus, width * ssaa_times, height * ssaa_times, width * ssaa_times * 4, 32, 0x00FF0000, 0XFF000000, 0X0000FF00, false);
+//    FIBITMAP* pixels = FreeImage_ConvertFromRawBits(pixels_plus, width * ssaa_times, height * ssaa_times, width * ssaa_times * 4, 32, 0x00FF0000, 0XFF000000, 0X0000FF00, false);
 //    const char* outputFilename = "outputTEST_1_plus.psd";  // 输出图像文件路径
-//    FreeImage_Save(FIF_PSD, image, outputFilename);
+//    FreeImage_Save(FIF_PSD, pixels, outputFilename);
 //    // 释放FIBITMAP对象和像素数据内存
-//    FreeImage_Unload(image);
+//    FreeImage_Unload(pixels);
 //}
-//void MySetPixel(int index_pixel,int index_pixel_x,int index_pixel_y,int newLine,int newColumn)
+//void MySetPixel_plus(int index_pixel,int index_pixel_x,int index_pixel_y,int newLine,int newColumn)
 //{
 //    int index_pixel_plus = index_pixel_y *ssaa_times*4 + width*ssaa_times*ssaa_times*4* index_pixel_x + newLine* width * ssaa_times*4 + newColumn *4;
 //    for (int i = 0; i < 4; i++)
@@ -82,7 +82,7 @@
 //        {
 //            for (int new_column = 0; new_column < ssaa_times; new_column++)
 //            {
-//                MySetPixel(i,index_in_line,index_in_column,new_line,new_column);
+//                MySetPixel_plus(i,index_in_line,index_in_column,new_line,new_column);
 //			}
 //        }
 //	}
