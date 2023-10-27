@@ -2,6 +2,155 @@
 E:\Projects\Unique\Renderer\Project1\2.cpp(51,147): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
 E:\Projects\Unique\Renderer\Project1\2.cpp(52,147): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
 E:\Projects\Unique\Renderer\Project1\2.cpp(53,81): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
-E:\Projects\Unique\Renderer\Project1\2.cpp(356,16): warning C4244: “初始化”: 从“double”转换到“int”，可能丢失数据
-E:\Projects\Unique\Renderer\Project1\2.cpp(357,18): warning C4244: “初始化”: 从“double”转换到“int”，可能丢失数据
-  Project1.vcxproj -> E:\Projects\Unique\Renderer\Project1\Debug\Project1.exe
+E:\Projects\Unique\Renderer\Project1\2.cpp(76,7): error C2039: "x1": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(76,17): error C2039: "x1": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(77,7): error C2039: "y1": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(77,17): error C2039: "y1": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(78,7): error C2039: "x2": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(78,17): error C2039: "x2": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(79,7): error C2039: "y2": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(79,17): error C2039: "y2": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(80,7): error C2039: "x3": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(80,17): error C2039: "x3": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(81,7): error C2039: "y3": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(81,17): error C2039: "y3": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(86,7): error C2039: "x1": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(86,19): error C2039: "z1": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(87,7): error C2039: "y1": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(87,19): error C2039: "z1": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(88,7): error C2039: "z1": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(88,19): error C2039: "z1": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(90,7): error C2039: "x2": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(90,19): error C2039: "z2": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(91,7): error C2039: "y2": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(91,19): error C2039: "z2": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(92,7): error C2039: "z2": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(92,19): error C2039: "z2": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(94,7): error C2039: "x3": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(94,19): error C2039: "z3": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(95,7): error C2039: "y3": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(95,19): error C2039: "z3": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(96,7): error C2039: "z3": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(96,19): error C2039: "z3": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(101,7): error C2039: "x1": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(101,18): error C2039: "x1": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(102,7): error C2039: "y1": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(102,18): error C2039: "y1": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(104,7): error C2039: "x2": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(104,18): error C2039: "x2": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(105,7): error C2039: "y2": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(105,18): error C2039: "y2": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(107,7): error C2039: "x3": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(107,18): error C2039: "x3": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(108,7): error C2039: "y3": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(108,18): error C2039: "y3": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(112,18): error C2039: "x1": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(113,18): error C2039: "y1": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(114,18): error C2039: "x2": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(115,18): error C2039: "y2": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(116,18): error C2039: "x3": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(117,18): error C2039: "y3": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(211,17): error C2039: "y2": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(211,26): error C2039: "y1": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(211,37): error C2039: "z3": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(211,46): error C2039: "z1": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(211,57): error C2039: "z2": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(211,66): error C2039: "z1": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(211,77): error C2039: "y3": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(211,86): error C2039: "y1": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(212,17): error C2039: "z2": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(212,26): error C2039: "z1": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(212,37): error C2039: "x3": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(212,46): error C2039: "x1": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(212,57): error C2039: "x2": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(212,66): error C2039: "x1": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(212,77): error C2039: "z3": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(212,86): error C2039: "z1": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(213,17): error C2039: "x2": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(213,26): error C2039: "x1": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(213,37): error C2039: "y3": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(213,46): error C2039: "y1": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(213,57): error C2039: "y2": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(213,66): error C2039: "y1": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(213,77): error C2039: "x3": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(213,86): error C2039: "x1": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(214,25): error C2039: "x1": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(214,38): error C2039: "y1": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(214,51): error C2039: "z1": 不是 "Triangle" 的成员
+E:\Projects\Unique\Renderer\Project1\2.cpp(56,7): message : 参见“Triangle”的声明
+E:\Projects\Unique\Renderer\Project1\2.cpp(360,16): warning C4244: “初始化”: 从“double”转换到“int”，可能丢失数据
+E:\Projects\Unique\Renderer\Project1\2.cpp(361,18): warning C4244: “初始化”: 从“double”转换到“int”，可能丢失数据

@@ -40,11 +40,11 @@ public:
 	Vector3(float x, float y, float z)
 		: x(x), y(y), z(z) {};
 };
-void RotateVector3(Vector3 vertex_center,Vector3* vec, float rx, float ry, float rz)
+void RotateVector3(Vector3 vertex_center,Vector3* vec, Vector3 vec_angle)
 {
-	float radian_x = rx * 3.1415926f / 180.0f;
-	float radian_y = ry * 3.1415926f / 180.0f;
-	float radian_z = rz * 3.1415926f / 180.0f;
+	float radian_x = vec_angle.x * 3.1415926f / 180.0f;
+	float radian_y = vec_angle.y * 3.1415926f / 180.0f;
+	float radian_z = vec_angle.z * 3.1415926f / 180.0f;
 	float x = vec->x;
 	float y = vec->y;
 	float z = vec->z;
@@ -56,6 +56,10 @@ void RotateVector3(Vector3 vertex_center,Vector3* vec, float rx, float ry, float
 class Triangle
 {
 public:
+	Vector3 v1;
+	Vector3 v2;
+	Vector3 v3;
+
 	float x1, y1,z1;
 	float x2, y2,z2;
 	float x3, y3,z3;
@@ -64,6 +68,8 @@ public:
 		: x1(x1), y1(y1), x2(x2), y2(y2), x3(x3), y3(y3) {};*/
 	Triangle(Vector3 v1,Vector3 v2,Vector3 v3)
 		:x1(v1.x),y1(v1.y),z1(v1.z),x2(v2.x),y2(v2.y),z2(v2.z),x3(v3.x),y3(v3.y),z3(v3.z){};
+	/*Triangle(Vector3 v1, Vector3 v2, Vector3 v3)
+		: v1(v1), v2(v2), v3(v3) {};*/
 };
 //[-1,1]的倍数转换成绝对像素坐标
 void RelativeToAbsolute(Triangle* tri)
@@ -131,14 +137,14 @@ bool IsInGrid(int x, int y, Triangle tri)
 class Cube
 {
 public:
-	Vector3 center;		//中心点
+	Vector3 vec_c;		//中心点
 	float length;		//边长
-	float rx, ry, rz;	//旋转角度
+	Vector3 vec_r;		//旋转角度
 	Vector3 vertex[8];	//八个顶点
 	Triangle face[12];	//六个面的12个三角形
 
-	Cube(Vector3 v, float length, float rx, float ry, float rz)
-		:center(v), length(length), rx(rx), ry(ry), rz(rz)
+	Cube(Vector3 v, float length,Vector3 v_r)
+		:vec_c(v), length(length), vec_r(v_r)
 	{	
 		vertex[0] = Vector3(- length / 2, - length / 2, - length / 2);
 		vertex[1] = Vector3(- length / 2, - length / 2, + length / 2);
@@ -150,7 +156,7 @@ public:
 		vertex[7] = Vector3(+ length / 2, + length / 2, + length / 2);
 		//根据rx ry rz旋转顶点位置
 		for (int i = 0; i < 8; i++)
-			RotateVector3(center,&vertex[i], rx, ry, rz);
+			RotateVector3(vec_c,&vertex[i], vec_r);
 		face[0] = Triangle(vertex[0],vertex[1],vertex[2]);
 		face[1] = Triangle(vertex[3],vertex[1],vertex[2]);
 
@@ -385,10 +391,6 @@ void DrawCube(Cube cube,_ppm pixels)
 		index_face = i;
 		ImageToPerspective(&cube.face[i]);
 		PerspectiveToScreen(&cube.face[i]);
-		/*printf("tri2.x1 = %f,tri2.y1 = %f\n", cube.face[i].x1, cube.face[i].y1);
-		printf("tri2.x2 = %f,tri2.y2 = %f\n", cube.face[i].x2, cube.face[i].y2);
-		printf("tri2.x3 = %f,tri2.y3 = %f\n", cube.face[i].x3, cube.face[i].y3);
-		printf("________________________________\n");*/
 		printf("face : %d\n", index_face);
 		pixels.DrawTriangle(cube.face[i]);
 	}
@@ -416,8 +418,8 @@ int main()
 	printf("tri2.x2 = %f,tri2.y2 = %f\n", tri2.x2, tri2.y2);
 	printf("tri2.x3 = %f,tri2.y3 = %f\n", tri2.x3, tri2.y3);*/
 	
-	Cube cube(Vector3(0, 0, 60), 20, 45, 45, 0);
-	Cube cube2(Vector3(10, 10, 60), 20, 10, 20, 10);
+	Cube cube(Vector3(0, 0, 60), 20,Vector3(45, 45, 0));
+	Cube cube2(Vector3(10, 10, 60), 20,Vector3(10, 20, 10));
 	DrawCube(cube,img);
 	DrawCube(cube2, img);
 	img.WriteImage(file_pos);
