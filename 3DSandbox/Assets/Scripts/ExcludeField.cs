@@ -26,4 +26,8 @@ public class ExcludeField : MonoBehaviour
             other.GetComponent<Rigidbody>().AddForce(dir.normalized * excludeForce);
         }
     }
+    void TestOverlap()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, excludeRadius);
+    }
 }

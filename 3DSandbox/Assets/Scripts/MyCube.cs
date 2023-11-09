@@ -6,17 +6,6 @@ public class MyCube : MonoBehaviour
 {
     [SerializeField][Header("可以存在的最低高度")]
     private float lowestY = -20f;
-    public void SetNormal()
-    {
-        GetComponent<ExcludeField>().enabled = false;
-        GetComponent<MeshRenderer>().material.color = Color.white;
-    }
-
-    public void SetExclude()
-    {
-        GetComponent<ExcludeField>().enabled = true;
-        GetComponent<MeshRenderer>().material.color = Color.blue;
-    }
     private void Update()
     {
         if(GetComponent<LineRenderer>())

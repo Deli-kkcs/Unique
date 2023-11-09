@@ -31,6 +31,7 @@ public class ExplodeField : MonoBehaviour
             other.GetComponent<Rigidbody>().AddForce(dir.normalized * explodeForce);
         }
     }
+    
     private void Update()
     {
         if (enabled == false)
